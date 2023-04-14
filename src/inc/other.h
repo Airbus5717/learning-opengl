@@ -6,4 +6,4 @@
 decl_vec(string);
 decl_vec(i32);
 
-vec(i32) randomNumbers();
+vec(i32) randomNumbers(const usize size);

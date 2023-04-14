@@ -6,13 +6,12 @@ i32 getRandNum()
     return result;
 }
 
-vec(i32) randomNumbers()
+vec(i32) randomNumbers(const usize size)
 {
     srand(0); // seed for rand
-    const u8 SIZE = 10;
-    vec(i32) v = vec_new(i32, SIZE);
+    vec(i32) v = vec_new(i32, size);
 
-    for (size_t i = 0; i < SIZE; i++)
-        vec_insert(v, getRandNum() % getRandNum());
+    for (size_t i = 0; i < size; i++)
+        vec_insert_at_idx(v, i, getRandNum() % getRandNum());
     return v;
 }
