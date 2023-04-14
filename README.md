@@ -2,8 +2,8 @@
 
 Download Zig compiler & expose it to the path
 
-to build `zig build`
-to run `zig build run`
+- to build `zig build`
+- to run `zig build run`
 
 
 ## TODO 
