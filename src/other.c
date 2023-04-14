@@ -1,6 +1,7 @@
 #include "inc/other.h"
 
-i32 getRandNum()
+// local: only this file has access to it
+local i32 getRandNum()
 {
     i32 result = rand();
     return result;

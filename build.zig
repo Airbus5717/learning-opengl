@@ -51,7 +51,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     var s = findCSourceFilesInDir(b, "src") catch unreachable;
+    var utils = findCSourceFilesInDir(b, "src/utils") catch unreachable;
     exe.addCSourceFiles(s, &cflags);
+    exe.addCSourceFiles(utils, &cflags);
 
     exe.c_std = .C11;
 

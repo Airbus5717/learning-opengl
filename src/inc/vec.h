@@ -80,11 +80,6 @@ static inline _vector_header *_new_vec(_vector_header *header, usize initial_siz
         (vec)->elements[(vec)->count++] = __VA_ARGS__;     \
     } while (0);
 
-#define vec_insert_at_idx(vec, idx, ...)                      \
-    do                                                 \
-    {                                                  \
-        (vec)->elements[idx] = __VA_ARGS__; \
-    } while (0);
 
 #define vec_start(vec) seq_start(vec)
 #define vec_end(vec) seq_end(vec)
