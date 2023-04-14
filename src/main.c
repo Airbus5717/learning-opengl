@@ -8,9 +8,8 @@ i32 main(void /*i32 argc, i8 **argv*/)
     puts("printing a random 10 numbers");
 
     vec(i32) d = randomNumbers(10);
-    for (usize i = 0; i < 10; i++)
-        printf("%d\n", d->elements[i]);
-
+    FOREACH(i, d->count) 
+        printf("i: %d, el: %d\n", i, d->elements[i]);    
     // NOTE: free Vector
     vec_free(d);
     return 0;

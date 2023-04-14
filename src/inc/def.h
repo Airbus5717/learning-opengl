@@ -47,4 +47,6 @@ typedef char *cstring;      // mutable string (null char terminated)
 #define I64_MAX 0x7fffffffffffffff
 #define I64_MIN -0x8000000000000000
 
+#define FOREACH(i, r) for (usize i = 0; i < r; ++i)
+
 // END OF DEF.H
