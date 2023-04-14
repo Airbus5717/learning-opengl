@@ -12,6 +12,26 @@ const cflags = .{
 // Although this function looks imperative, note that its job is to
 // declaratively construct a build graph that will be executed by an external
 // runner.
+
+fn findCSourceFilesInDir(b: *const std.Build, dirname: []const u8) ![]const []const u8 {
+    var dir = try std.fs.cwd().openIterableDir(dirname, .{});
+    defer dir.close();
+
+    var walker = try dir.walk(b.allocator);
+    defer walker.deinit();
+
+    var files = std.ArrayList([]const u8).init(b.allocator);
+
+    while (try walker.next()) |ent| {
+        if (ent.kind != .File) continue;
+        if (!std.mem.endsWith(u8, ent.basename, ".c")) continue;
+        const full = try std.fs.path.join(b.allocator, &.{ dirname, ent.path });
+        try files.append(full);
+    }
+
+    return files.items;
+}
+
 pub fn build(b: *std.Build) void {
     // Standard target options allows the person running `zig build` to choose
     // what target to build for. Here we do not override the defaults, which
@@ -30,11 +50,8 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-
-    exe.addCSourceFiles(&.{
-        "src/main.c",
-        "src/other.c",
-    }, &cflags);
+    var s = findCSourceFilesInDir(b, "src") catch unreachable;
+    exe.addCSourceFiles(s, &cflags);
 
     exe.c_std = .C11;
 
