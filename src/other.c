@@ -11,7 +11,7 @@ vec(i32) randomNumbers(const usize size)
     srand(0); // seed for rand
     vec(i32) v = vec_new(i32, size);
 
-    for (size_t i = 0; i < size; i++)
+    for (usize i = 0; i < size; i++)
         vec_insert_at_idx(v, i, getRandNum() % getRandNum());
     return v;
 }
