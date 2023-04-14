@@ -38,7 +38,7 @@
 #define decl_vec(T)      \
     typedef struct       \
     {                    \
-        size_t length;   \
+        size_t count;    \
         size_t capacity; \
         T elements[];    \
     } *vec(T);           \
@@ -51,29 +51,40 @@
 
 typedef struct
 {
-    size_t length;
+    size_t count;
     size_t capacity;
 } _vector_header;
 
-static inline void *_new_vec(_vector_header *header)
+static inline _vector_header *_new_vec(_vector_header *header, usize initial_size)
 {
-    header->length = 0;
-    header->capacity = 4;
+    header->count = 0;
+    header->capacity = initial_size;
     return header;
 }
 
-#define new_vec(T) _new_vec(mem_alloc(sizeof(_vector_header) + 4 * sizeof(T)))
-#define free_vec(vec) mem_free(vec)
+#define vec_new(T, size) (_new_vec(mem_alloc(sizeof(_vector_header) + size * sizeof(T)), size))
+#define vec_free(vec) mem_free(vec)
+
+#define vec_resize(vec)                  \
+    (vec)->capacity *= _VEC_GROWTH_RATE; \
+    (vec) = mem_realloc(vec, vec_total_size(vec));
 
 #define vec_push(vec, ...)                                 \
     do                                                     \
     {                                                      \
-        if ((vec)->length + 1 < (vec)->capacity)           \
+        if ((vec)->count + 1 < (vec)->capacity)            \
         {                                                  \
             (vec)->capacity *= _VEC_GROWTH_RATE;           \
             (vec) = mem_realloc(vec, vec_total_size(vec)); \
         }                                                  \
-        (vec)->elements[(vec)->length++] = __VA_ARGS__;    \
+        (vec)->elements[(vec)->count++] = __VA_ARGS__;     \
+    } while (0);
+
+// Removed checks
+#define vec_insert(vec, ...)                           \
+    do                                                 \
+    {                                                  \
+        (vec)->elements[(vec)->count++] = __VA_ARGS__; \
     } while (0);
 
 #define vec_start(vec) seq_start(vec)

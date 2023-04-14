@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <stdbool.h>
+
+#define local static
 
 typedef float f32;
 typedef double f64;
@@ -26,9 +29,6 @@ typedef unsigned long long usize;
 
 typedef const char *string; // immutable string (null char terminated)
 typedef char *cstring;      // mutable string (null char terminated)
-
-const u8 TRUE = (0 == 0);
-const u8 FALSE = !TRUE;
 
 #define U8_MAX 0xff
 #define U8_MIN 0
