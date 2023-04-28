@@ -72,7 +72,7 @@ static inline _vector_header *_new_vec(_vector_header *header, usize initial_siz
 #define vec_push(vec, ...)                                 \
     do                                                     \
     {                                                      \
-        if ((vec)->count + 1 < (vec)->capacity)            \
+        if ((vec)->count + 1 > (vec)->capacity)            \
         {                                                  \
             (vec)->capacity *= _VEC_GROWTH_RATE;           \
             (vec) = mem_realloc(vec, vec_total_size(vec)); \

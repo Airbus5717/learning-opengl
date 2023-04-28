@@ -1,17 +1,19 @@
 #include "../inc/platform.h"
 
-
-void *mem_alloc(usize size) 
+void *mem_alloc(usize size)
 {
-    return malloc(size);
+    void *result = malloc(size);
+    return (result);
 }
 
-void *mem_realloc(void *mem_blk, usize size) 
+void *mem_realloc(void *mem_block, usize size)
 {
-    return realloc(mem_blk, size);
+    void *result = realloc(mem_block, size);
+    return (result);
 }
 
-void mem_free(void *mem_blk) 
+void mem_free(void *mem_block)
 {
-    free(mem_blk);
+    void *ptr = mem_block;
+    free(ptr);
 }
