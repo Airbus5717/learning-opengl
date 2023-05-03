@@ -1,19 +1,12 @@
 #include "inc/def.h"
+#include "inc/game.h"
 
-#include "inc/other.h"
-
-i32 main(void /*i32 argc, i8 **argv*/)
+i32 
+main(void) 
 {
-    puts("Hello, Template");
-    puts("printing a random 10 numbers");
-    
+    game_init();
+    game_loop();
+    game_deinit();
 
-    // vec(i32) type must be pre declared (see inc/other.h)
-    vec(i32) d = randomNumbers(10);
-    FOREACH(i, d->count) 
-        printf("i: %d, el: %d\n", i, d->elements[i]);    
-   
-    // NOTE: free Vector
-    vec_free(d);
-    return 0;
+    return (0);
 }

@@ -1,12 +1,15 @@
 const std = @import("std");
 
+const exe_name = "learn";
+
 const cflags = .{
+    "-W",
     "-Wall",
     "-Wextra",
-    // "-Wstrict-prototypes",
-    "-fno-exceptions",
     "-Wconversion",
     "-Wwrite-strings",
+    "-fno-exceptions",
+//    "-Wstrict-prototypes",
     "-Wno-missing-field-initializers",
 };
 // Although this function looks imperative, note that its job is to
@@ -45,7 +48,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const exe = b.addExecutable(.{
-        .name = "template-c",
+        .name = exe_name,
         .root_source_file = null,
         .target = target,
         .optimize = optimize,
@@ -53,6 +56,8 @@ pub fn build(b: *std.Build) void {
     var s = findCSourceFilesInDir(b, "src") catch unreachable;
     exe.addCSourceFiles(s, &cflags);
     exe.addIncludePath("src/inc/");
+    exe.addIncludePath("src/libs/glad");
+    exe.addIncludePath("src/libs/KHR");
 
     exe.c_std = .C11;
 
@@ -60,6 +65,7 @@ pub fn build(b: *std.Build) void {
     // standard location when the user invokes the "install" step (the default
     // step when running `zig build`).
     exe.linkLibC();
+    exe.linkSystemLibrary("SDL2");
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
     // step when running `zig build`).
