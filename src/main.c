@@ -1,8 +1,8 @@
 #include "inc/def.h"
 #include "inc/game.h"
 
-i32 
-main(void) 
+i32
+main(void)
 {
     game_init();
     game_loop();
