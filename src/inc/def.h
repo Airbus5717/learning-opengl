@@ -8,7 +8,7 @@
 #include <string.h>
 #include <time.h>
 
-#define local static
+#define internal static
 
 #ifndef nullptr
 #define nullptr NULL

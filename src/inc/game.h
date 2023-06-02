@@ -6,6 +6,10 @@
 // opengl
 void get_opengl_versions();
 
+
+void vertex_spec();
+void graphics_init_pipeline();
+
 // game
 void game_init();
 void game_loop();
