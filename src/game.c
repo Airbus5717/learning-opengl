@@ -48,7 +48,7 @@ vertex_spec()
         0.0f,  0.8f,  0.0f, // vertex 3
     };
 
-     int SIZE = sizeof(vertex_pos) / sizeof(vertex_pos[0]);
+    int SIZE = sizeof(vertex_pos) / sizeof(vertex_pos[0]);
 
     glGenVertexArrays(1, &g_vertex_arr_obj);
     glBindVertexArray(g_vertex_arr_obj);
@@ -142,6 +142,7 @@ game_init()
     ASSERT_NULL(g_glcontext, "GL context didnt create");
 
     ASSERT(gladLoadGLLoader(SDL_GL_GetProcAddress), "Glad was not initialized");
+
     get_opengl_versions();
 }
 
