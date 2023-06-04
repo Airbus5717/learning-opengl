@@ -26,8 +26,6 @@ GLuint g_vertex_arr_obj                = 0;
 GLuint g_vertex_buff_obj               = 0;
 GLuint g_graphics_pipeline_shader_prog = 0;
 
-decl_vec(GLfloat);
-
 void
 get_opengl_versions()
 {
